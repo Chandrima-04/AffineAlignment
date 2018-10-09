@@ -1,8 +1,9 @@
 # AffineAlignment
-An overlap alignment between two strings s and t is a local alignment of a suffix of s with a prefix of t. An optimal overlap alignment will therefore maximize an alignment score over all such substrings of s and t.
 
-The term "overlap alignment" has also been used to describe what Rosalind defines as a semiglobal alignment. See “Semiglobal Alignment” for details.
+An affine gap penalty is written as a+b⋅(L−1), where L is the length of the gap, a is a positive constant called the gap opening penalty, and b is a positive constant called the gap extension penalty.
 
-Given: Two DNA strings s and t in FASTA format, each having length at most 10 kbp.
+We can view the gap opening penalty as charging for the first gap symbol, and the gap extension penalty as charging for each subsequent symbol added to the gap.
 
-Return: The score of an optimal overlap alignment of s and t, followed by an alignment of a suffix s′ of s and a prefix t′ of t achieving this optimal score. Use an alignment score in which matching symbols count +1, substitutions count -2, and there is a linear gap penalty of 2. If multiple optimal alignments exist, then you may return any one.
+For example, if a=11 and b=1, then a gap of length 1 would be penalized by 11 (for an average cost of 11 per gap symbol), whereas a gap of length 100 would have a score of 110 (for an average cost of 1.10 per gap symbol).
+
+Consider the strings "PRTEINS" and "PRTWPSEIN". If we use the BLOSUM62 scoring matrix and an affine gap penalty with a=11 and b=1, then we obtain the following optimal alignment.
